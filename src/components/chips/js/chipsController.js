@@ -374,7 +374,7 @@ MdChipsCtrl.prototype.chipKeydown = function (event) {
       event.preventDefault();
       // By default, allow selection of -1 which will focus the input; if we're readonly, don't go
       // below 0
-      if (this.selectedChip < 0 || (this.readonly && this.selectedChip == 0)) {
+      if (this.selectedChip < 0 || (this.readonly && this.selectedChip === 0)) {
         this.selectedChip = this.items.length;
       }
       if (this.items.length) this.selectAndFocusChipSafe(this.selectedChip - 1);
@@ -400,7 +400,7 @@ MdChipsCtrl.prototype.chipKeydown = function (event) {
 MdChipsCtrl.prototype.getPlaceholder = function() {
   // Allow `secondary-placeholder` to be blank.
   var useSecondary = (this.items && this.items.length &&
-      (this.secondaryPlaceholder == '' || this.secondaryPlaceholder));
+      (this.secondaryPlaceholder === '' || this.secondaryPlaceholder));
   return useSecondary ? this.secondaryPlaceholder : this.placeholder;
 };
 
@@ -447,8 +447,8 @@ MdChipsCtrl.prototype.resetSelectedChip = function() {
  */
 MdChipsCtrl.prototype.getAdjacentChipIndex = function(index) {
   var len = this.items.length - 1;
-  return (len == 0) ? -1 :
-      (index == len) ? index -1 : index;
+  return (len === 0) ? -1 :
+      (index === len) ? index -1 : index;
 };
 
 /**
@@ -687,13 +687,14 @@ MdChipsCtrl.prototype.selectChip = function(index) {
  */
 MdChipsCtrl.prototype.selectAndFocusChip = function(index) {
   this.selectChip(index);
-  if (index != -1) {
+  if (index !== -1) {
     this.focusChip(index);
   }
 };
 
 /**
  * Call `focus()` on the chip at `index`
+ * @param index chip to call `focus()` on
  */
 MdChipsCtrl.prototype.focusChip = function(index) {
   var chipContent = this.$element[0].querySelector('md-chip[index="' + index + '"] .md-chip-content');
@@ -796,7 +797,7 @@ MdChipsCtrl.prototype.configureUserInput = function(inputElement) {
   // Find the NgModelCtrl for the input element
   var ngModelCtrl = inputElement.controller('ngModel');
   // `.controller` will look in the parent as well.
-  if (ngModelCtrl != this.ngModelCtrl) {
+  if (ngModelCtrl !== this.ngModelCtrl) {
     this.userInputNgModelCtrl = ngModelCtrl;
   }
 
